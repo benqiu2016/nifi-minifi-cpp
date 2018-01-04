@@ -161,6 +161,12 @@ if (NOT DISABLE_LIBARCHIVE)
 	createExtension(ARCHIVE-EXTENSIONS "ARCHIVE EXTENSIONS" "This Enables libarchive functionality including MergeContent, CompressContent, (Un)FocusArchiveEntry and ManipulateArchive." "extensions/libarchive" "${TEST_DIR}/archive-tests" BUILD_TP "thirdparty/libarchive-3.3.2")
 endif()
 
+## Create MQTT Extension
+option(ENABLE_MQTT "Enables the mqtt extension." OFF)
+if(ENABLE_ALL OR ENABLE_MQTT)
+	createExtension(MQTT-EXTENSIONS "MQTT EXTENSIONS" "This Enables MQTT functionality including PublishMQTT/ConsumeMQTT" "extensions/mqtt" "${TEST_DIR}/mqtt-tests" "TRUE" "thirdparty/paho.mqtt.c")
+endif()
+
 option(ENABLE_GPS "Enables the GPS extension." OFF)
 if (ENABLE_ALL OR ENABLE_GPS)
 	createExtension(GPS-EXTENSION "GPS EXTENSIONS" "Enables LibGPS Functionality and the GetGPS processor." "extensions/gps" "${TEST_DIR}/gps-tests")
@@ -237,6 +243,7 @@ set(CPACK_PACKAGE_FILE_NAME "${ASSEMBLY_BASE_NAME}")
 set(CPACK_BINARY_TGZ, "ON")
 set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
 set(CPACK_RDKAFKA_COMPONENT_INSTALL ON)
+set(CPACK_MQTT_COMPONENT_INSTALL ON)
 set(CPACK_COMPONENTS_ALL bin)
 
 
